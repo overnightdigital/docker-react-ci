@@ -9,3 +9,15 @@ before_install:
 
 script:
   - docker run -e CI=true amilinko/docker-react-ci npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-west-2"  
+  app: "docker-react-cli"
+  env: "DockerReactCli-env"
+  bucket_name: "elasticbeanstalk-eu-west-2-040274357757"
+  bucket_path: "docker-react-cli"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
